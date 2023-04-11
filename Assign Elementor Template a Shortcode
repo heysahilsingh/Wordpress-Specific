@@ -1,0 +1,12 @@
+//Assign Elementor Template a Shortcode
+function insert_elementor_template_shortcode( $atts ) {
+    $atts = shortcode_atts( array(
+        'id' => '',
+    ), $atts, 'INSERT_ELEMENTOR' );
+    if ( empty( $atts['id'] ) ) {
+        return;
+    }
+    $template_content = Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $atts['id'] );
+    return $template_content;
+}
+add_shortcode( 'INSERT_ELEMENTOR', 'insert_elementor_template_shortcode' );
